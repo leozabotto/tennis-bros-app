@@ -20,14 +20,15 @@ export const {
       white: '#fff',
       black: '#000',
 
-      primary100: '#6FCF97',
-      primary200: '#4A8A64',
+      'c-green-100': '#CFEFDC',
+      'c-green-200': '#6FCF97',
+      'c-green-300': '#4A8A64',
 
-      gray100: '#DBDCDA',
-      gray200: '#959692',
-      gray300: '#61625C',
-      gray400: '#40413D',
-      gray500: '#151514',
+      'c-gray-100': '#DBDCDA',
+      'c-gray-200': '#959692',
+      'c-gray-300': '#61625C',
+      'c-gray-400': '#40413D',
+      'c-gray-500': '#151514',
     },
     radii: {
       px: '1px',

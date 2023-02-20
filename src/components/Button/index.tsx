@@ -1,26 +1,17 @@
 import { styled } from 'stiches.config';
 
 interface ButtonProps {
-  children: string;
+  children: React.ReactNode;
   onClick: () => void;
 }
 
-const StyledButton = styled('button', {
-  backgroundColor: '$primary100',
-  fontWeight: '$medium',
-  color: '$white',
-  borderRadius: '$full',
-  width: '100%',
-  height: '40px',
-  transition: '$short',
-
-  '&:hover': {
-    cursor: 'pointer',
-    backgroundColor: '$primary200',
-    transition: '$short',
-  },
-});
-
 export default function Button({ children, onClick }: ButtonProps) {
-  return <StyledButton onClick={onClick}>{children}</StyledButton>;
+  return (
+    <button
+      type="button"
+      className="w-full text-white bg-c-green-200 hover:bg-c-green-300 focus:outline-none focus:ring-4 focus:ring-c-green-100 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    >
+      {children}
+    </button>
+  );
 }

@@ -7,7 +7,7 @@ interface LinkProps {
 }
 
 const StyledLink = styled(Link, {
-  color: '$primary100',
+  color: '$c-green-200',
   textDecoration: 'underline',
 });
 

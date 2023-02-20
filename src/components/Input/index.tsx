@@ -1,4 +1,4 @@
-import { styled } from 'stiches.config';
+import { TextInput } from 'flowbite-react';
 
 interface InputProps {
   type: string;
@@ -8,32 +8,23 @@ interface InputProps {
   [rest: string]: any;
 }
 
-const StyledInput = styled('input', {
-  border: '1px solid $gray100',
-  color: '$gray300',
-  borderRadius: '$sm',
-  height: '40px',
-  width: '100%',
-  padding: '2px 10px',
-  fontWeight: '$medium',
-
-  '&:focus': {
-    outlineColor: '$primary100',
-  },
-});
-
-const StyledLabel = styled('label', {
-  display: 'block',
-  color: '$gray300',
-  fontWeight: '$medium',
-  marginBottom: '4px',
-});
-
 export default function Input({ type, name, label, id, ...rest }: InputProps) {
   return (
-    <>
-      <StyledLabel htmlFor={id}>{label}</StyledLabel>
-      <StyledInput type={type} name={name} id={id} {...rest} />
-    </>
+    <div className="relative">
+      <input
+        type={type}
+        id={id}
+        name={name}
+        className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-c-green-200 peer"
+        placeholder=" "
+        {...rest}
+      />
+      <label
+        htmlFor={id}
+        className="absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-focus:text-c-green-200 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+      >
+        {label}
+      </label>
+    </div>
   );
 }

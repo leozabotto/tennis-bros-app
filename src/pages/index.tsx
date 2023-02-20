@@ -1,4 +1,5 @@
 import Button from '@/components/Button';
+import LogoTypography from '@/components/LogoTypography';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -21,8 +22,8 @@ export default function Home() {
       <main>
         <div className="flex flex-col gap-5 font-semibold items-center justify-center h-screen">
           <Image src={logo} width={100} height={100} alt="Tennis Bros Logo" />
-          <h1 className="text-gray-600 font-bold text-xl">Tennis Bros</h1>
-          <p className="text-gray-700 text-center w-8/12 lg:w-3/12">
+          <LogoTypography />
+          <p className="text-center w-8/12 lg:w-3/12">
             A mais nova comunidade para jogadores de tênis!
           </p>
 
