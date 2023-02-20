@@ -5,3 +5,7 @@
 html {
   color: #40413d;
 }
+
+.c-divider-top {
+  border-top: 1px solid #dddddd;
+}

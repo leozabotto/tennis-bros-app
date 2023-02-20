@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@iconscout/react-unicons": "^1.1.6",
     "@next/font": "13.1.6",
     "@stitches/react": "^1.2.8",
     "@types/node": "18.14.0",
