@@ -1,5 +1,3 @@
-import { TextInput } from 'flowbite-react';
-
 interface InputProps {
   type: string;
   id: string;

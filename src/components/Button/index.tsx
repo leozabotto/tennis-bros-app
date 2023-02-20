@@ -1,5 +1,3 @@
-import { styled } from 'stiches.config';
-
 interface ButtonProps {
   children: React.ReactNode;
   onClick: () => void;

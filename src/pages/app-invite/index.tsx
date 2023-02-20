@@ -1,13 +1,13 @@
 import Head from 'next/head';
-import Button from '@/components/Button';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
-import Input from '@/components/Input';
-import Link from '@/components/Link';
 
-import logo from '../../assets/images/tennis-bros-logo.png';
+import Button from '@/components/Button';
+import Link from '@/components/Link';
 import LogoTypography from '@/components/LogoTypography';
 import DeveloperCreditsFooter from '@/components/DeveloperCreditsFooter';
-import { useRouter } from 'next/router';
+
+import logo from '@/assets/images/tennis-bros-logo.png';
 
 export default function AppInvite() {
   const router = useRouter();

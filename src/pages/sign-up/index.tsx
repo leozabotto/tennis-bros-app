@@ -1,12 +1,13 @@
 import Head from 'next/head';
-import Button from '@/components/Button';
 import Image from 'next/image';
+
+import Button from '@/components/Button';
 import Input from '@/components/Input';
 import Link from '@/components/Link';
-
-import logo from '../../assets/images/tennis-bros-logo.png';
 import LogoTypography from '@/components/LogoTypography';
 import DeveloperCreditsFooter from '@/components/DeveloperCreditsFooter';
+
+import logo from '@/assets/images/tennis-bros-logo.png';
 
 export default function SignUp() {
   return (
@@ -29,7 +30,7 @@ export default function SignUp() {
               <LogoTypography classes={''} />
             </div>
 
-            <form action="#" className="flex flex-col gap-3 mt-">
+            <form action="#" className="flex flex-col gap-3">
               <div>
                 <Input
                   type="text"
