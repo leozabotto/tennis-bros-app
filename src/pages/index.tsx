@@ -2,7 +2,7 @@ import Button from '@/components/Button';
 import LogoTypography from '@/components/LogoTypography';
 import Head from 'next/head';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 import logo from '../assets/images/tennis-bros-logo.png';
 
@@ -10,7 +10,7 @@ export default function Home() {
   const router = useRouter();
 
   const handleRedirect = (): void => {
-    router.push('/login');
+    router.push('/teslogin');
   };
 
   return (

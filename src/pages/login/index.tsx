@@ -29,7 +29,7 @@ export default function Home() {
               <LogoTypography classes={''} />
             </div>
 
-            <form action="#" className="flex flex-col gap-3 mt-">
+            <form action="#" className="flex flex-col gap-3">
               <div>
                 <Input
                   type="text"
