@@ -5,7 +5,7 @@ interface LogoTypographyProps {
 }
 
 const StyledH1 = styled('h1', {
-  color: '$gray300',
+  color: '$c-gray-300',
   fontWeight: 'bold',
   fontSize: '$2xl',
 });
