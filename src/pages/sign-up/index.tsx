@@ -8,12 +8,12 @@ import logo from '../../assets/images/tennis-bros-logo.png';
 import LogoTypography from '@/components/LogoTypography';
 import DeveloperCreditsFooter from '@/components/DeveloperCreditsFooter';
 
-export default function Home() {
+export default function SignUp() {
   return (
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Login | Tennis Bros</title>
+        <title>Cadastro | Tennis Bros</title>
       </Head>
       <main>
         <div className="flex flex-col items-center justify-center min-h-screen">
@@ -33,9 +33,33 @@ export default function Home() {
               <div>
                 <Input
                   type="text"
-                  name="user"
+                  name="name"
+                  id="input__name"
+                  label="Nome Completo"
+                />
+              </div>
+              <div>
+                <Input
+                  type="text"
+                  name="name"
                   id="input__user"
-                  label="E-mail ou Usuário"
+                  label="Usuário"
+                />
+              </div>
+              <div>
+                <Input
+                  type="text"
+                  name="phone"
+                  id="input__phone"
+                  label="Celular"
+                />
+              </div>
+              <div>
+                <Input
+                  type="email"
+                  name="email"
+                  id="input__email"
+                  label="E-mail"
                 />
               </div>
               <div>
@@ -46,12 +70,20 @@ export default function Home() {
                   label="Senha"
                 />
               </div>
+              <div>
+                <Input
+                  type="password"
+                  name="pwd-conf"
+                  id="input__pwd-conf"
+                  label="Confirmar Senha"
+                />
+              </div>
               <div className="w-full mt-5">
-                <Button onClick={() => null}>Entrar</Button>
+                <Button onClick={() => null}>Registrar</Button>
               </div>
               <div>
                 <p className="text-center text-gray-600 font-medium">
-                  Ainda não é membro? <Link href="sign-up">Cadastre-se</Link>
+                  Já é membro? <Link href="login">Entrar</Link>
                 </p>
               </div>
             </form>
