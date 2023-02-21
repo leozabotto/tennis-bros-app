@@ -1,9 +1,5 @@
-import UserEnvironmentTemplate from '@/template/UserEnvironmentTemplate';
+import TemplatePage from '@/template';
 
 export default function Stats() {
-  return (
-    <UserEnvironmentTemplate pageTitle="Minha Evolução">
-      Minha Evolução
-    </UserEnvironmentTemplate>
-  );
+  return <TemplatePage pageTitle="Minha Evolução">Minha Evolução</TemplatePage>;
 }

@@ -1,20 +1,23 @@
-import BottomNavigation from '@/components/BottomNavigation';
 import Head from 'next/head';
 
-interface UserEnvironmentTemplateProps {
+import TopBar from './TopBar';
+import BottomNavigation from './BottomNavigation';
+
+interface TemplatePageProps {
   pageTitle: string;
   children?: React.ReactNode;
 }
 
-export default function UserEnvironmentTemplate({
+export default function TemplatePage({
   children,
   pageTitle,
-}: UserEnvironmentTemplateProps) {
+}: TemplatePageProps) {
   return (
     <>
       <Head>
         <title>{pageTitle} | Tennis Bros</title>
       </Head>
+      <TopBar />
       <main>
         <BottomNavigation />
       </main>

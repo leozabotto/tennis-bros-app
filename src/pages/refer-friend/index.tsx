@@ -1,9 +1,5 @@
-import UserEnvironmentTemplate from '@/template/UserEnvironmentTemplate';
+import TemplatePage from '@/template';
 
 export default function ReferFriend() {
-  return (
-    <UserEnvironmentTemplate pageTitle="Convidar Amigo">
-      Convidar Amigo
-    </UserEnvironmentTemplate>
-  );
+  return <TemplatePage pageTitle="Convidar Amigo">Convidar Amigo</TemplatePage>;
 }

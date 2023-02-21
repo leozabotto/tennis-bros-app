@@ -1,9 +1,7 @@
-import UserEnvironmentTemplate from '@/template/UserEnvironmentTemplate';
+import TemplatePage from '@/template';
 
 export default function Matches() {
   return (
-    <UserEnvironmentTemplate pageTitle="Minhas Partidas">
-      Minhas Partidas
-    </UserEnvironmentTemplate>
+    <TemplatePage pageTitle="Minhas Partidas">Minhas Partidas</TemplatePage>
   );
 }

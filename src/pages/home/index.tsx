@@ -1,7 +1,5 @@
-import UserEnvironmentTemplate from '@/template/UserEnvironmentTemplate';
+import TemplatePage from '@/template';
 
 export default function Home() {
-  return (
-    <UserEnvironmentTemplate pageTitle="Home">Home</UserEnvironmentTemplate>
-  );
+  return <TemplatePage pageTitle="Home">Home</TemplatePage>;
 }
