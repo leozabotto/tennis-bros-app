@@ -74,7 +74,9 @@ export default function AppDrawer() {
 
   return (
     <>
-      <TriggerButton handleDrawer={handleDrawer} />
+      <div className="inline-flex grow items-center">
+        <TriggerButton handleDrawer={handleDrawer} />
+      </div>
       <Drawer open={isOpen} onClose={handleDrawer} direction="left">
         <div className="flex flex-col pl-5 pr-5 pt-10">
           <ul>

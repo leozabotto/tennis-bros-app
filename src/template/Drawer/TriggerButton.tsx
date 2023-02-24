@@ -8,7 +8,7 @@ export default function DrawerTriggerButton({
   return (
     <button
       type="button"
-      className="inline-flex grow items-center text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+      className="text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
       onClick={handleDrawer}
     >
       <span className="sr-only">Abrir Menu Lateral</span>
