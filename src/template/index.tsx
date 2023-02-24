@@ -2,6 +2,7 @@ import Head from 'next/head';
 
 import TopBar from './TopBar';
 import BottomNavigation from './BottomNavigation';
+import AppDrawer from './Drawer';
 
 interface TemplatePageProps {
   pageTitle: string;
@@ -15,10 +16,11 @@ export default function TemplatePage({
   return (
     <>
       <Head>
-        <title>{pageTitle} | Tennis Bros</title>
+        <title>{`${pageTitle} | Tennis Bros`}</title>
       </Head>
       <TopBar />
       <main>
+        <AppDrawer />
         <BottomNavigation />
       </main>
     </>

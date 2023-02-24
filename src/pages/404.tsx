@@ -32,6 +32,7 @@ export default function AppInvite() {
                 height={100}
                 alt="Tennis Bros Logo"
                 className="mb-5"
+                priority={true}
               />
               <LogoTypography classes={''} />
             </div>

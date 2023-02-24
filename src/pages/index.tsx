@@ -23,7 +23,13 @@ export default function Home() {
       </Head>
       <main className="min-h-screen flex flex-col">
         <div className="flex flex-col gap-5 items-center justify-center grow">
-          <Image src={logo} width={100} height={100} alt="Tennis Bros Logo" />
+          <Image
+            src={logo}
+            width={100}
+            height={100}
+            alt="Tennis Bros Logo"
+            priority={true}
+          />
           <LogoTypography />
 
           <p className="text-center w-8/12 lg:w-3/12 font-regular">
