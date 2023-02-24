@@ -9,3 +9,7 @@ html {
 .c-divider-top {
   border-top: 1px solid #dddddd;
 }
+
+.c-pt-15 {
+  padding-top: 3.58rem;
+}

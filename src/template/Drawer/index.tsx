@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 
 const Drawer = dynamic(() => import('react-modern-drawer'), { ssr: false });
@@ -14,54 +15,8 @@ import {
   UilUserCircle,
 } from '@iconscout/react-unicons';
 
+import NavButton, { INavButton } from '@/components/NavButton';
 import TriggerButton from './TriggerButton';
-import { useRouter } from 'next/router';
-
-type DrawerItem = {
-  label: string;
-  Icon: Icon;
-  onClick: () => any;
-  isActiveDefinedBy: string;
-  href?: string;
-  isElementOpen?: boolean;
-};
-
-const DrawerItemButton = ({
-  label,
-  Icon,
-  onClick,
-  isActiveDefinedBy,
-  isElementOpen,
-  href,
-}: DrawerItem) => {
-  const router = useRouter();
-  const currentPath = router.pathname;
-
-  const handleActiveClass = (): boolean => {
-    switch (isActiveDefinedBy) {
-      case 'path':
-        return currentPath === href;
-      case 'elementOpen':
-        return isElementOpen as boolean;
-      default:
-        return false;
-    }
-  };
-
-  const isActive = handleActiveClass();
-  const activeClass = isActive ? 'rounded-full bg-c-green-200 text-white' : '';
-
-  return (
-    <button className="flex items-center gap-5" onClick={onClick}>
-      <span
-        className={`text-gray-500 hover:text-c-gray-600 ${activeClass} p-2`}
-      >
-        <Icon />
-      </span>
-      <span>{label}</span>
-    </button>
-  );
-};
 
 export default function AppDrawer() {
   const [isOpen, setIsOpen] = useState(false);
@@ -72,7 +27,7 @@ export default function AppDrawer() {
 
   const router = useRouter();
 
-  const drawerItems = useRef<DrawerItem[]>([
+  const drawerItems = useRef<INavButton[]>([
     {
       href: '/home',
       isActiveDefinedBy: 'path',
@@ -121,10 +76,17 @@ export default function AppDrawer() {
     <>
       <TriggerButton handleDrawer={handleDrawer} />
       <Drawer open={isOpen} onClose={handleDrawer} direction="left">
-        <div className="flex flex-col pl-5 pt-10">
-          {drawerItems.current.map((item, index) => (
-            <DrawerItemButton key={index} {...item} />
-          ))}
+        <div className="flex flex-col pl-5 pr-5 pt-10">
+          <ul>
+            {drawerItems.current.map((item, index) => (
+              <li key={index}>
+                <NavButton
+                  {...item}
+                  classes={'hover:bg-gray-100 p-2 rounded'}
+                />
+              </li>
+            ))}
+          </ul>
         </div>
       </Drawer>
     </>

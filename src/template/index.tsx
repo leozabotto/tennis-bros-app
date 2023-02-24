@@ -3,6 +3,7 @@ import Head from 'next/head';
 import TopBar from './TopBar';
 import BottomNavigation from './BottomNavigation';
 import AppDrawer from './Drawer';
+import Sidebar from './SideBar';
 
 interface TemplatePageProps {
   pageTitle: string;
@@ -18,7 +19,10 @@ export default function TemplatePage({
       <Head>
         <title>{`${pageTitle} | Tennis Bros`}</title>
       </Head>
+
       <TopBar />
+      <Sidebar />
+
       <main>
         <AppDrawer />
         <BottomNavigation />

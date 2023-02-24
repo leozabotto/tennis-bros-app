@@ -1,12 +1,14 @@
-interface DrawerButton {
+interface IDrawerTriggerButton {
   handleDrawer: () => void;
 }
 
-export default function DrawerButton({ handleDrawer }: DrawerButton) {
+export default function DrawerTriggerButton({
+  handleDrawer,
+}: IDrawerTriggerButton) {
   return (
     <button
       type="button"
-      className="inline-flex grow items-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+      className="inline-flex grow items-center text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
       onClick={handleDrawer}
     >
       <span className="sr-only">Abrir Menu Lateral</span>
