@@ -7,6 +7,7 @@ export interface ITabItem {
 
 interface ITabs {
   items: ITabItem[];
+  classes?: string;
   currentTab: string;
 }
 
@@ -31,9 +32,11 @@ const TabItem = ({ name, currentTab, label, onClick }: ITabItem) => {
   );
 };
 
-export default function Tabs({ items, currentTab }: ITabs) {
+export default function Tabs({ items, currentTab, classes = '' }: ITabs) {
   return (
-    <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-200">
+    <div
+      className={`text-sm font-medium text-center text-gray-500 border-b border-gray-200 bg-white w-full ${classes}`}
+    >
       <ul className="flex -mb-px overflow-x-auto">
         {items.map((tab, index) => (
           <TabItem key={index} {...tab} currentTab={currentTab} />

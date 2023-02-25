@@ -58,8 +58,12 @@ export default function Home() {
 
   return (
     <TemplatePage pageTitle="Home">
-      <Tabs currentTab={currentTab} items={homeTabs.current} />
-      <div className="pt-5">{getHomePagesByTabs(currentTab)}</div>
+      <Tabs
+        currentTab={currentTab}
+        items={homeTabs.current}
+        classes="fixed pt-5"
+      />
+      <div className="mt-20">{getHomePagesByTabs(currentTab)}</div>
     </TemplatePage>
   );
 }

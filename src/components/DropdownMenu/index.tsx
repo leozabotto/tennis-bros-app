@@ -40,7 +40,7 @@ export default function DropdownMenu({ items }: DropdownMenuProps) {
                   <a
                     href="#"
                     className={
-                      'flex flex-nowrap w-auto items-center gap-4 text-gray-700 block px-4 py-2 text-sm'
+                      'flex flex-nowrap font-medium w-auto items-center gap-4 text-gray-500 block px-4 py-2 text-sm hover:bg-gray-100'
                     }
                     onClick={onClick}
                   >
