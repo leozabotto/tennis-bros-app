@@ -42,12 +42,10 @@ export default function NavButton({
       className={`flex items-center gap-5 w-full ${classes}`}
       onClick={onClick}
     >
-      <span
-        className={`text-gray-500 hover:text-c-gray-600 ${activeClass} p-2`}
-      >
+      <span className={`font-semibold text-gray-500 ${activeClass} p-2`}>
         <Icon />
       </span>
-      <span>{label}</span>
+      <span className="font-semibold text-gray-500">{label}</span>
     </button>
   );
 }

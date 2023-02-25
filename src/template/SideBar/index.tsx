@@ -66,7 +66,7 @@ export default function Sidebar() {
 
   return (
     <>
-      <aside
+      <nav
         id="default-sidebar"
         className="invisible md:visible fixed top-0 c-pt-15 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
         aria-label="Sidebar"
@@ -82,8 +82,10 @@ export default function Sidebar() {
                 alt="Imagem de Perfil do Usuário"
               />
             </div>
-            <span className="block text-center mt-2">Leonardo Zabotto</span>
-            <span className="block text-center text-c-gray-200">
+            <span className="font-bold block text-center mt-2 text-gray-500">
+              Leonardo Zabotto
+            </span>
+            <span className="font-medium block text-center text-c-gray-200">
               @leozabotto
             </span>
           </div>
@@ -95,7 +97,7 @@ export default function Sidebar() {
             ))}
           </ul>
         </div>
-      </aside>
+      </nav>
     </>
   );
 }

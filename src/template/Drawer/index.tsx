@@ -78,18 +78,20 @@ export default function AppDrawer() {
         <TriggerButton handleDrawer={handleDrawer} />
       </div>
       <Drawer open={isOpen} onClose={handleDrawer} direction="left">
-        <div className="flex flex-col pl-5 pr-5 pt-10">
-          <ul>
-            {drawerItems.current.map((item, index) => (
-              <li key={index}>
-                <NavButton
-                  {...item}
-                  classes={'hover:bg-gray-100 p-2 rounded'}
-                />
-              </li>
-            ))}
-          </ul>
-        </div>
+        <nav>
+          <div className="flex flex-col pl-5 pr-5 pt-10">
+            <ul>
+              {drawerItems.current.map((item, index) => (
+                <li key={index}>
+                  <NavButton
+                    {...item}
+                    classes={'hover:bg-gray-100 p-2 rounded'}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </nav>
       </Drawer>
     </>
   );

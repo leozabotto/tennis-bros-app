@@ -21,12 +21,15 @@ export default function TemplatePage({
       </Head>
 
       <TopBar />
+
       <Sidebar />
+      <AppDrawer />
 
       <main>
-        <AppDrawer />
-        <BottomNavigation />
+        <div className="p-4 pt-2 md:ml-64 pt-6 md:pt-10">{children}</div>
       </main>
+
+      <BottomNavigation />
     </>
   );
 }
