@@ -11,7 +11,7 @@ const StyledLink = styled(Link, {
   textDecoration: 'underline',
 });
 
-export default function Input({ href, children }: LinkProps) {
+export default function CustomLink({ href, children }: LinkProps) {
   return (
     <>
       <StyledLink href={href}>{children}</StyledLink>

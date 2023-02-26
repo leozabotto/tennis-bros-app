@@ -1,5 +1,8 @@
 import Head from 'next/head';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+
+import { useForm, useFormState } from 'react-hook-form';
 
 import Button from '@/components/Button';
 import Input from '@/components/Input';
@@ -7,9 +10,87 @@ import Link from '@/components/Link';
 import LogoTypography from '@/components/LogoTypography';
 import DeveloperCreditsFooter from '@/components/DeveloperCreditsFooter';
 
+import { errorToaster, successToaster } from '@/utils/toaster';
+import { getResponseError } from '@/utils/error';
+import { emailRegExp } from '@/utils/regex';
+
+import { createUser, getCreateUserError } from '@/repositories/userRepository';
+
 import logo from '@/assets/images/tennis-bros-logo.png';
 
+type FormDataCreateUser = {
+  id: number;
+  name: string;
+  userName: string;
+  email: string;
+  phoneNumber: string;
+  password: string;
+  passwordConfirmation: string;
+};
+
 export default function SignUp() {
+  const router = useRouter();
+
+  const { register, handleSubmit, setError, control } =
+    useForm<FormDataCreateUser>({
+      defaultValues: {
+        name: '',
+        userName: '',
+        email: '',
+        phoneNumber: '',
+        password: '',
+        passwordConfirmation: '',
+      },
+      mode: 'onBlur',
+      reValidateMode: 'onBlur',
+    });
+
+  const { errors } = useFormState({
+    control,
+  });
+
+  const validateFormData = (data: FormDataCreateUser): boolean => {
+    if (data.password !== data.passwordConfirmation) {
+      setError('passwordConfirmation', {
+        type: 'custom',
+        message: 'passwords does not match',
+      });
+      return false;
+    }
+
+    if (data.phoneNumber.trim().length !== 11) {
+      setError('phoneNumber', {
+        type: 'custom',
+        message: 'invalid phone number',
+      });
+      return false;
+    }
+
+    return true;
+  };
+
+  const onSubmit = async (data: FormDataCreateUser) => {
+    const isValid = validateFormData(data);
+
+    if (isValid) {
+      try {
+        await createUser(data);
+
+        successToaster(
+          'Usuário criado com sucesso! Você será redirecionado em 3 segundos.',
+          3000
+        );
+
+        setTimeout(() => router.push('/login'), 3000);
+      } catch (err) {
+        const error = getResponseError(err);
+        errorToaster(getCreateUserError((error?.code as number) || 0));
+      }
+    }
+
+    return;
+  };
+
   return (
     <>
       <Head>
@@ -18,7 +99,7 @@ export default function SignUp() {
       </Head>
       <main>
         <div className="flex flex-col items-center justify-center min-h-screen">
-          <div className="w-full sm:4/5 md:w-3/5 lg:w-2/5 2xl:w-1/5 p-10 grow justify-center flex flex-col">
+          <div className="w-full sm:4/5 md:w-3/5 lg:w-2/5 xl:w-4/12 p-10 grow justify-center flex flex-col">
             <div className="mb-5 flex flex-col md:items-center md:justify-center">
               <Image
                 src={logo}
@@ -35,53 +116,76 @@ export default function SignUp() {
               <div>
                 <Input
                   type="text"
-                  name="name"
                   id="input__name"
                   label="Nome Completo"
+                  errorMessage="Preencha o nome"
+                  hasError={errors.name ? true : false}
+                  {...register('name', { required: true })}
                 />
               </div>
               <div>
                 <Input
                   type="text"
-                  name="name"
                   id="input__user"
                   label="Usuário"
+                  required={true}
+                  hasError={errors.userName ? true : false}
+                  errorMessage={'Preencha o nome de usuário'}
+                  {...register('userName', { required: true })}
                 />
               </div>
               <div>
                 <Input
                   type="text"
-                  name="phone"
                   id="input__phone"
                   label="Celular"
+                  hasError={errors.phoneNumber ? true : false}
+                  errorMessage={'Preencha o celular'}
+                  {...register('phoneNumber', { required: true })}
                 />
               </div>
               <div>
                 <Input
                   type="email"
-                  name="email"
                   id="input__email"
                   label="E-mail"
+                  hasError={errors.email ? true : false}
+                  errorMessage={'Preencha com um e-mail válido'}
+                  {...register('email', {
+                    required: true,
+                    pattern: emailRegExp,
+                  })}
                 />
               </div>
               <div>
                 <Input
                   type="password"
-                  name="pwd"
                   id="input__pwd"
                   label="Senha"
+                  required={true}
+                  hasError={errors.password ? true : false}
+                  errorMessage={
+                    'Preencha a senha (Min. 6 e Max. 12 caracteres)'
+                  }
+                  {...register('password', {
+                    required: true,
+                    minLength: 6,
+                    maxLength: 12,
+                  })}
                 />
               </div>
               <div>
                 <Input
                   type="password"
-                  name="pwd-conf"
                   id="input__pwd-conf"
                   label="Confirmar Senha"
+                  hasError={errors.passwordConfirmation ? true : false}
+                  errorMessage="As senhas não conferem"
+                  {...register('passwordConfirmation', { required: true })}
                 />
               </div>
               <div className="w-full mt-5">
-                <Button onClick={() => null}>Registrar</Button>
+                <Button onClick={handleSubmit(onSubmit)}>Registrar</Button>
               </div>
               <div>
                 <p className="text-center text-gray-600 font-medium">
