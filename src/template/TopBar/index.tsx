@@ -1,15 +1,17 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { UserTokenData } from '@/hooks/useAuth';
+
 import logo from '@/assets/images/tennis-bros-logo.png';
 import AppDrawer from '../Drawer';
 
-export default function TopBar() {
+export default function TopBar({ user }: { user: UserTokenData }) {
   return (
-    <nav className="bg-white px-2 md:px-4 py-2.5 fixed w-full z-20 top-0 left-0 border-b border-gray-200">
+    <nav className="bg-white px-2 md:px-4 py-2.5 fixed w-full z-30 top-0 left-0 border-b border-gray-200">
       <div className="container grid grid-cols-3 md:grid-cols-1 mx-auto">
-        <div className="flex items-end z-999 md:hidden">
-          <AppDrawer />
+        <div className="flex items-end z-40 md:hidden">
+          <AppDrawer user={user} />
         </div>
         <div className="flex grow justify-center">
           <Link href="home">

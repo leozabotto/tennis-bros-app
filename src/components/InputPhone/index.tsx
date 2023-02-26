@@ -13,7 +13,7 @@ type InputProps = {
   defaultValue: string;
 };
 
-export const InputPhoneHookForm = React.forwardRef<
+const InputPhoneHookForm = React.forwardRef<
   HTMLInputElement,
   InputProps & React.HTMLAttributes<HTMLInputElement>
 >(({ name, control, defaultValue, hasError, ...rest }, ref) => {
@@ -29,3 +29,7 @@ export const InputPhoneHookForm = React.forwardRef<
     />
   );
 });
+
+InputPhoneHookForm.displayName = 'InputPhoneHookForm';
+
+export { InputPhoneHookForm };

@@ -13,3 +13,11 @@ html {
 .c-pt-15 {
   padding-top: 3.58rem;
 }
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select,
+  textarea,
+  input {
+    font-size: 16px !important;
+  }
+}

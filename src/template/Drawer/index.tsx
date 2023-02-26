@@ -16,10 +16,14 @@ import {
 } from '@iconscout/react-unicons';
 
 import NavButton, { INavButton } from '@/components/NavButton';
-import TriggerButton from './TriggerButton';
+import { UserTokenData } from '@/hooks/useAuth';
 
-export default function AppDrawer() {
+import TriggerButton from './TriggerButton';
+import LogoutConfirmationModal from '@/components/LogoutConfirmationModal';
+
+export default function AppDrawer({ user }: { user: UserTokenData }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
   const handleDrawer = (): void => {
     setIsOpen(!isOpen);
@@ -66,7 +70,7 @@ export default function AppDrawer() {
     {
       isActiveDefinedBy: 'elementOpen',
       isElementOpen: false,
-      onClick: () => alert('Open logout confirmation'),
+      onClick: () => setIsLogoutModalOpen(true),
       label: 'Logout',
       Icon: UilSignout,
     },
@@ -93,6 +97,12 @@ export default function AppDrawer() {
           </div>
         </nav>
       </Drawer>
+      {isLogoutModalOpen && (
+        <LogoutConfirmationModal
+          isOpen={isLogoutModalOpen}
+          setIsOpen={setIsLogoutModalOpen}
+        />
+      )}
     </>
   );
 }

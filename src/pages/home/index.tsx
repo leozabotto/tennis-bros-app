@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { GetServerSidePropsContext } from 'next';
 
 import Tabs, { ITabItem } from '@/components/Tabs';
 import TemplatePage from '@/template';
@@ -6,6 +7,8 @@ import NewInvites from './components/NewInvites';
 import MyInvites from './components/MyInvites';
 import AcceptedInvites from './components/AcceptedInvites';
 import RejectedInvites from './components/RejectedInvites';
+
+import { authPrivate } from '@/utils/auth';
 
 type HomeTabs =
   | 'new-invites'
@@ -61,9 +64,13 @@ export default function Home() {
       <Tabs
         currentTab={currentTab}
         items={homeTabs.current}
-        classes="fixed pt-5"
+        classes="fixed pt-10"
       />
       <div className="mt-20">{getHomePagesByTabs(currentTab)}</div>
     </TemplatePage>
   );
 }
+
+export const getServerSideProps = (cx: GetServerSidePropsContext) => {
+  return authPrivate(cx);
+};

@@ -1,19 +1,27 @@
+import { useEffect } from 'react';
+
 import Head from 'next/head';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
+import { GetServerSidePropsContext } from 'next';
 
 import Button from '@/components/Button';
 import LogoTypography from '@/components/LogoTypography';
 import DeveloperCreditsFooter from '@/components/DeveloperCreditsFooter';
 
 import logo from '@/assets/images/tennis-bros-logo.png';
+import { authPublic } from '@/utils/auth';
 
-export default function Home() {
+export default function IndexPage() {
   const router = useRouter();
 
   const handleRedirect = (): void => {
     router.push('/login');
   };
+
+  useEffect(() => {
+    handleRedirect();
+  });
 
   return (
     <>
@@ -31,17 +39,12 @@ export default function Home() {
             priority={true}
           />
           <LogoTypography />
-
-          <p className="text-center w-8/12 lg:w-3/12 font-regular">
-            A mais nova comunidade para jogadores de tênis!
-          </p>
-
-          <div className="w-10/12 md:w-6/12 lg:w-3/12 mt-5">
-            <Button onClick={handleRedirect}>Acessar</Button>
-          </div>
-          <DeveloperCreditsFooter classes="pb-10" />
         </div>
       </main>
     </>
   );
 }
+
+export const getServerSideProps = (cx: GetServerSidePropsContext) => {
+  return authPublic(cx);
+};

@@ -19,6 +19,54 @@ export default function MyInvites() {
         userAlreadyInteracted={false}
         showActionButtons={false}
       />
+      <InviteCard
+        status="Finalizado"
+        isRejected={false}
+        userOwner={true}
+        showMenuButton={true}
+        userAlreadyInteracted={false}
+        showActionButtons={false}
+      />
+      <InviteCard
+        status="Finalizado"
+        isRejected={false}
+        userOwner={true}
+        showMenuButton={true}
+        userAlreadyInteracted={false}
+        showActionButtons={false}
+      />
+      <InviteCard
+        status="Finalizado"
+        isRejected={false}
+        userOwner={true}
+        showMenuButton={true}
+        userAlreadyInteracted={false}
+        showActionButtons={false}
+      />
+      <InviteCard
+        status="Finalizado"
+        isRejected={false}
+        userOwner={true}
+        showMenuButton={true}
+        userAlreadyInteracted={false}
+        showActionButtons={false}
+      />
+      <InviteCard
+        status="Finalizado"
+        isRejected={false}
+        userOwner={true}
+        showMenuButton={true}
+        userAlreadyInteracted={false}
+        showActionButtons={false}
+      />
+      <InviteCard
+        status="Finalizado"
+        isRejected={false}
+        userOwner={true}
+        showMenuButton={true}
+        userAlreadyInteracted={false}
+        showActionButtons={false}
+      />
     </div>
   );
 }

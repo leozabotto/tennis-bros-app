@@ -1,6 +1,5 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import {
@@ -13,11 +12,14 @@ import {
 } from '@iconscout/react-unicons';
 
 import userProfilePlaceholder from '@/assets/images/user-profile-placeholder.png';
-
 import NavButton, { INavButton } from '@/components/NavButton';
 
-export default function Sidebar() {
+import { UserTokenData } from '@/hooks/useAuth';
+import LogoutConfirmationModal from '@/components/LogoutConfirmationModal';
+
+export default function Sidebar({ user }: { user: UserTokenData }) {
   const router = useRouter();
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
   const navItems = useRef<INavButton[]>([
     {
@@ -58,7 +60,7 @@ export default function Sidebar() {
     {
       isActiveDefinedBy: 'elementOpen',
       isElementOpen: false,
-      onClick: () => alert('Open logout confirmation'),
+      onClick: () => setIsLogoutModalOpen(true),
       label: 'Logout',
       Icon: UilSignout,
     },
@@ -83,10 +85,10 @@ export default function Sidebar() {
               />
             </div>
             <span className="font-bold block text-center mt-2 text-gray-500">
-              Leonardo Zabotto
+              {user.name}
             </span>
             <span className="font-medium block text-center text-c-gray-200">
-              @leozabotto
+              @{user.userName}
             </span>
           </div>
           <ul className="flex flex-col mt-10">
@@ -98,6 +100,12 @@ export default function Sidebar() {
           </ul>
         </div>
       </nav>
+      {isLogoutModalOpen && (
+        <LogoutConfirmationModal
+          isOpen={isLogoutModalOpen}
+          setIsOpen={setIsLogoutModalOpen}
+        />
+      )}
     </>
   );
 }

@@ -9,6 +9,10 @@ export interface IUser {
   password?: string;
 }
 
+export interface IUserAuth {
+  token: string;
+}
+
 export interface IRequestCreateUser {
   name: string;
   userName: string;
@@ -49,12 +53,25 @@ export const getCreateUserError = (code: number | undefined): string => {
   }
 };
 
-export const createUser = async (data: IRequestCreateUser): Promise<IUser> => {
-  return await api.post('/user', data);
+export const getAuthUserError = (code: number | undefined): string => {
+  switch (code) {
+    case 100:
+      return 'Preencha o usuário';
+    case 101:
+      return 'Preencha a senha';
+    case 102:
+      return 'E-mail ou Senha inválidos';
+    default:
+      return 'Ocorreu um erro ao entrar. Tente novamente!';
+  }
 };
 
-export const authUser = async (data: IRequestAuthUser): Promise<IUser> => {
-  return await api.post('/user/auth', data);
+export const createUser = async (data: IRequestCreateUser): Promise<IUser> => {
+  return (await api.post('/user', data)).data;
+};
+
+export const authUser = async (data: IRequestAuthUser): Promise<IUserAuth> => {
+  return (await api.post('/user/auth', data)).data;
 };
 
 const userRepository = {

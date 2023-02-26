@@ -1,3 +1,3 @@
 export default function NewInvites() {
-  return <h1>Novos Convites</h1>;
+  return <div>Novos Convites</div>;
 }

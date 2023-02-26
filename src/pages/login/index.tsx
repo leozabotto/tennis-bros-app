@@ -1,6 +1,11 @@
+import { useState } from 'react';
+
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { GetServerSidePropsContext } from 'next';
+
+import { useForm, useFormState } from 'react-hook-form';
 
 import Button from '@/components/Button';
 import Input from '@/components/Input';
@@ -9,9 +14,56 @@ import LogoTypography from '@/components/LogoTypography';
 import DeveloperCreditsFooter from '@/components/DeveloperCreditsFooter';
 
 import logo from '@/assets/images/tennis-bros-logo.png';
+import { getResponseError } from '@/utils/error';
+import { errorToaster } from '@/utils/toaster';
 
-export default function Home() {
+import useAuth from '@/hooks/useAuth';
+import { authPublic } from '@/utils/auth';
+
+import { authUser, getAuthUserError } from '@/repositories/userRepository';
+
+type FormDataAuthUser = {
+  user: string;
+  password: string;
+};
+
+export default function Login() {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { handleSignIn } = useAuth();
+
+  const { register, handleSubmit, setError, control } =
+    useForm<FormDataAuthUser>({
+      defaultValues: {
+        user: '',
+        password: '',
+      },
+      mode: 'onBlur',
+      reValidateMode: 'onBlur',
+    });
+
+  const { errors } = useFormState({
+    control,
+  });
+
+  const handleUserKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      handleSubmit(onSubmit)();
+    }
+  };
+
+  const onSubmit = async (data: FormDataAuthUser) => {
+    setIsLoading(true);
+    try {
+      const res = await authUser(data);
+      handleSignIn(res.token);
+    } catch (err) {
+      const error = getResponseError(err);
+      errorToaster(getAuthUserError(error?.code || 0));
+    }
+    setIsLoading(false);
+  };
 
   const handleRedirect = (): void => {
     router.push('/home');
@@ -38,25 +90,33 @@ export default function Home() {
               <LogoTypography classes={''} />
             </div>
 
-            <form action="#" className="flex flex-col gap-3">
+            <form className="flex flex-col gap-3">
               <div>
                 <Input
                   type="text"
-                  name="user"
                   id="input__user"
                   label="E-mail ou Usuário"
+                  errorMessage="Informe seu e-mail ou usuário"
+                  hasError={errors.user ? true : false}
+                  onKeyDown={handleUserKeyPress}
+                  {...register('user', { required: true })}
                 />
               </div>
               <div>
                 <Input
                   type="password"
-                  name="pwd"
                   id="input__pwd"
                   label="Senha"
+                  errorMessage="Informe sua senha"
+                  hasError={errors.password ? true : false}
+                  onKeyDown={handleUserKeyPress}
+                  {...register('password', { required: true })}
                 />
               </div>
               <div className="w-full mt-5">
-                <Button onClick={handleRedirect}>Entrar</Button>
+                <Button onClick={handleSubmit(onSubmit)} disabled={isLoading}>
+                  Entrar
+                </Button>
               </div>
               <div>
                 <p className="text-center text-gray-600 font-medium">
@@ -71,3 +131,7 @@ export default function Home() {
     </>
   );
 }
+
+export const getServerSideProps = (cx: GetServerSidePropsContext) => {
+  return authPublic(cx);
+};

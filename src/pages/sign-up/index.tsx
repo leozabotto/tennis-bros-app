@@ -1,3 +1,4 @@
+import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -15,6 +16,7 @@ import { getResponseError } from '@/utils/error';
 import { emailRegExp } from '@/utils/regex';
 
 import { createUser, getCreateUserError } from '@/repositories/userRepository';
+import { authPublic } from '@/utils/auth';
 
 import logo from '@/assets/images/tennis-bros-logo.png';
 
@@ -91,6 +93,12 @@ export default function SignUp() {
     return;
   };
 
+  const handleUserKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      handleSubmit(onSubmit)();
+    }
+  };
+
   return (
     <>
       <Head>
@@ -99,7 +107,7 @@ export default function SignUp() {
       </Head>
       <main>
         <div className="flex flex-col items-center justify-center min-h-screen">
-          <div className="w-full sm:4/5 md:w-3/5 lg:w-2/5 xl:w-4/12 p-10 grow justify-center flex flex-col">
+          <div className="w-full sm:4/5 md:w-3/5 lg:w-2/5 2xl:w-1/5 p-10 grow justify-center flex flex-col">
             <div className="mb-5 flex flex-col md:items-center md:justify-center">
               <Image
                 src={logo}
@@ -120,6 +128,7 @@ export default function SignUp() {
                   label="Nome Completo"
                   errorMessage="Preencha o nome"
                   hasError={errors.name ? true : false}
+                  onKeyDown={handleUserKeyPress}
                   {...register('name', { required: true })}
                 />
               </div>
@@ -131,6 +140,7 @@ export default function SignUp() {
                   required={true}
                   hasError={errors.userName ? true : false}
                   errorMessage={'Preencha o nome de usuário'}
+                  onKeyDown={handleUserKeyPress}
                   {...register('userName', { required: true })}
                 />
               </div>
@@ -141,6 +151,7 @@ export default function SignUp() {
                   label="Celular"
                   hasError={errors.phoneNumber ? true : false}
                   errorMessage={'Preencha o celular'}
+                  onKeyDown={handleUserKeyPress}
                   {...register('phoneNumber', { required: true })}
                 />
               </div>
@@ -151,6 +162,7 @@ export default function SignUp() {
                   label="E-mail"
                   hasError={errors.email ? true : false}
                   errorMessage={'Preencha com um e-mail válido'}
+                  onKeyDown={handleUserKeyPress}
                   {...register('email', {
                     required: true,
                     pattern: emailRegExp,
@@ -167,6 +179,7 @@ export default function SignUp() {
                   errorMessage={
                     'Preencha a senha (Min. 6 e Max. 12 caracteres)'
                   }
+                  onKeyDown={handleUserKeyPress}
                   {...register('password', {
                     required: true,
                     minLength: 6,
@@ -181,6 +194,7 @@ export default function SignUp() {
                   label="Confirmar Senha"
                   hasError={errors.passwordConfirmation ? true : false}
                   errorMessage="As senhas não conferem"
+                  onKeyDown={handleUserKeyPress}
                   {...register('passwordConfirmation', { required: true })}
                 />
               </div>
@@ -200,3 +214,7 @@ export default function SignUp() {
     </>
   );
 }
+
+export const getServerSideProps = (cx: GetServerSidePropsContext) => {
+  return authPublic(cx);
+};
