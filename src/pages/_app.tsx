@@ -1,15 +1,18 @@
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
-import { RecoilRoot } from 'recoil';
+import { Provider } from 'jotai';
+import { useHydrateAtoms } from 'jotai/utils';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
 export default function App({ Component, pageProps }: AppProps) {
+  const { initialState } = pageProps;
+
   return (
-    <RecoilRoot>
+    <Provider>
       <ToastContainer />
       <Component {...pageProps} />
-    </RecoilRoot>
+    </Provider>
   );
 }

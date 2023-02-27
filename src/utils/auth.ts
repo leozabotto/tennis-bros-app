@@ -37,7 +37,9 @@ export function authPrivate(cx: GetServerSidePropsContext) {
   }
 
   return {
-    props: {},
+    props: {
+      user: parsedUserData,
+    },
   };
 }
 

@@ -16,10 +16,25 @@ import NavButton, { INavButton } from '@/components/NavButton';
 
 import { UserTokenData } from '@/hooks/useAuth';
 import LogoutConfirmationModal from '@/components/LogoutConfirmationModal';
+import { successToaster } from '@/utils/toaster';
 
 export default function Sidebar({ user }: { user: UserTokenData }) {
   const router = useRouter();
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+
+  const handleCopyReferLink = () => {
+    console.log(user.id);
+
+    navigator?.share({
+      url: `https://${window.location.host}/app-invite?userId=${user.id}`,
+    });
+
+    navigator?.clipboard?.writeText(
+      `https://${window.location.host}/app-invite?userId=${user.id}`
+    );
+
+    successToaster('Link copiado para área de transferência');
+  };
 
   const navItems = useRef<INavButton[]>([
     {
@@ -46,7 +61,7 @@ export default function Sidebar({ user }: { user: UserTokenData }) {
     {
       href: '/refer-friend',
       isActiveDefinedBy: 'path',
-      onClick: () => router.push('refer-friend'),
+      onClick: () => handleCopyReferLink(),
       label: 'Convidar Amigo',
       Icon: UilEnvelopeShare,
     },
@@ -73,6 +88,7 @@ export default function Sidebar({ user }: { user: UserTokenData }) {
         className="invisible md:visible fixed top-0 c-pt-15 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
         aria-label="Sidebar"
       >
+        <p>{user.id}</p>
         <div className="h-full px-3 py-4 overflow-y-auto bg-white border-r border-gray-200">
           <div className="mt-5">
             <div className="flex justify-center">

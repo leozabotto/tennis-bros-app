@@ -20,6 +20,7 @@ import { UserTokenData } from '@/hooks/useAuth';
 
 import TriggerButton from './TriggerButton';
 import LogoutConfirmationModal from '@/components/LogoutConfirmationModal';
+import { successToaster } from '@/utils/toaster';
 
 export default function AppDrawer({ user }: { user: UserTokenData }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,6 +31,19 @@ export default function AppDrawer({ user }: { user: UserTokenData }) {
   };
 
   const router = useRouter();
+
+  const handleCopyReferLink = () => {
+    navigator?.share({
+      url: `https://${window.location.host}/app-invite?userId=${user.id}`,
+    });
+
+    navigator?.clipboard?.writeText(
+      `https://${window.location.host}/app-invite?userId=${user.id}`
+    );
+
+    setIsOpen(false);
+    successToaster('Link copiado para área de transferência');
+  };
 
   const drawerItems = useRef<INavButton[]>([
     {
@@ -56,7 +70,7 @@ export default function AppDrawer({ user }: { user: UserTokenData }) {
     {
       href: '/refer-friend',
       isActiveDefinedBy: 'path',
-      onClick: () => router.push('refer-friend'),
+      onClick: () => handleCopyReferLink(),
       label: 'Convidar Amigo',
       Icon: UilEnvelopeShare,
     },

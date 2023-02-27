@@ -1,15 +1,17 @@
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { GetServerSidePropsContext } from 'next';
 
 import Button from '@/components/Button';
 import Link from '@/components/Link';
 import LogoTypography from '@/components/LogoTypography';
 import DeveloperCreditsFooter from '@/components/DeveloperCreditsFooter';
 
+import { findUser, IUser } from '@/repositories/userRepository';
 import logo from '@/assets/images/tennis-bros-logo.png';
 
-export default function AppInvite() {
+export default function AppInvite({ user }: { user: IUser }) {
   const router = useRouter();
 
   const handleRedirect = (): void => {
@@ -40,7 +42,7 @@ export default function AppInvite() {
             <div className="flex flex-col gap-5 justify-center items-center text-center">
               <p>
                 <span className="text-c-gray-300 font-bold">
-                  Leonardo (@leonardo)
+                  {user.name} (@{user.userName})
                 </span>{' '}
                 convidou você para o Tennis Bros!
               </p>
@@ -69,3 +71,25 @@ export default function AppInvite() {
     </>
   );
 }
+
+export const getServerSideProps = async (cx: GetServerSidePropsContext) => {
+  const { userId }: { userId?: number } = cx.query;
+
+  try {
+    const user = await findUser({ id: userId || 0 });
+    return {
+      props: {
+        user: {
+          name: user.name,
+          userName: user.userName,
+        },
+      },
+    };
+  } catch (err) {
+    return {
+      redirect: {
+        destination: '/home',
+      },
+    };
+  }
+};

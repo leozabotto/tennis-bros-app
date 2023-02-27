@@ -2,9 +2,10 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { parseCookies, setCookie, destroyCookie } from 'nookies';
 import jwt_decode from 'jwt-decode';
-import { useRecoilState, useResetRecoilState } from 'recoil';
+import { useAtom } from 'jotai';
+import { useResetAtom } from 'jotai/utils';
 
-import { USER_DATA, USER_TOKEN } from '@/storage/recoil';
+import { ATOM_USER_DATA, ATOM_USER_TOKEN } from '@/storage/atoms';
 
 export type UserTokenData = {
   id: number;
@@ -17,28 +18,18 @@ export type UserTokenData = {
 };
 
 const useAuth = () => {
-  const [userData, setUserData] = useRecoilState<UserTokenData>(USER_DATA);
-  const [userToken, setUserToken] = useRecoilState(USER_TOKEN);
+  const [userData, setUserData] = useAtom(ATOM_USER_DATA);
+  const [userToken, setUserToken] = useAtom(ATOM_USER_TOKEN);
 
-  const resetUserToken = useResetRecoilState(USER_TOKEN);
-  const resetUserData = useResetRecoilState(USER_DATA);
+  const resetUserToken = useResetAtom(ATOM_USER_TOKEN);
+  const resetUserData = useResetAtom(ATOM_USER_DATA);
 
   const router = useRouter();
 
-  useEffect(() => {
-    function loadData() {
-      const { 'session.token': token } = parseCookies();
-      const { 'session.user': userDataStr } = parseCookies();
-
-      if (!!token && !!userDataStr) {
-        const parsedUserData = JSON.parse(userDataStr);
-        setUserData(parsedUserData);
-        setUserToken(token);
-      }
-    }
-
-    loadData();
-  }, []);
+  const handleSetUserData = (user: UserTokenData, token: string): void => {
+    setUserData(user);
+    setUserToken(token);
+  };
 
   const handleSignIn = (token: string): any => {
     const userData = jwt_decode(token) as UserTokenData;
@@ -73,6 +64,7 @@ const useAuth = () => {
     user: userData,
     handleSignIn,
     handleSignOut,
+    handleSetUserData,
   };
 };
 

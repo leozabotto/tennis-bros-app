@@ -9,6 +9,7 @@ import AcceptedInvites from './components/AcceptedInvites';
 import RejectedInvites from './components/RejectedInvites';
 
 import { authPrivate } from '@/utils/auth';
+import { UserTokenData } from '@/hooks/useAuth';
 
 type HomeTabs =
   | 'new-invites'
@@ -31,7 +32,7 @@ const getHomePagesByTabs = (currentTab: HomeTabs) => {
   }
 };
 
-export default function Home() {
+export default function Home({ user }: { user: UserTokenData }) {
   const [currentTab, setCurrentTab] = useState<HomeTabs>('new-invites');
 
   const handleTabChange = (tab: HomeTabs) => setCurrentTab(tab);
@@ -60,7 +61,7 @@ export default function Home() {
   ]);
 
   return (
-    <TemplatePage pageTitle="Home">
+    <TemplatePage pageTitle="Home" user={user}>
       <Tabs
         currentTab={currentTab}
         items={homeTabs.current}

@@ -5,12 +5,11 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { GetServerSidePropsContext } from 'next';
 
-import Button from '@/components/Button';
 import LogoTypography from '@/components/LogoTypography';
-import DeveloperCreditsFooter from '@/components/DeveloperCreditsFooter';
 
 import logo from '@/assets/images/tennis-bros-logo.png';
 import { authPublic } from '@/utils/auth';
+import { findUser } from '@/repositories/userRepository';
 
 export default function IndexPage() {
   const router = useRouter();
@@ -44,7 +43,3 @@ export default function IndexPage() {
     </>
   );
 }
-
-export const getServerSideProps = (cx: GetServerSidePropsContext) => {
-  return authPublic(cx);
-};

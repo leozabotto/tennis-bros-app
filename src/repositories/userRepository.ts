@@ -26,6 +26,10 @@ export interface IRequestAuthUser {
   password: string;
 }
 
+export interface IRequestFindUser {
+  id: number;
+}
+
 export const getCreateUserError = (code: number | undefined): string => {
   switch (code) {
     case 100:
@@ -66,6 +70,17 @@ export const getAuthUserError = (code: number | undefined): string => {
   }
 };
 
+export const getFindUserError = (code: number | undefined): string => {
+  switch (code) {
+    case 100:
+      return 'ID de usuário não informado';
+    case 404:
+      return 'Usuário não encontrado';
+    default:
+      return 'Ocorreu um erro ao buscar o usuário. Tente novamente!';
+  }
+};
+
 export const createUser = async (data: IRequestCreateUser): Promise<IUser> => {
   return (await api.post('/user', data)).data;
 };
@@ -74,9 +89,14 @@ export const authUser = async (data: IRequestAuthUser): Promise<IUserAuth> => {
   return (await api.post('/user/auth', data)).data;
 };
 
+export const findUser = async (data: IRequestFindUser): Promise<IUser> => {
+  return (await api.get('/user/' + data.id)).data;
+};
+
 const userRepository = {
   createUser,
   authUser,
+  findUser,
 };
 
 export default userRepository;

@@ -1,24 +1,21 @@
-import { parseCookies } from 'nookies';
-
 import Head from 'next/head';
 
 import TopBar from './TopBar';
 import BottomNavigation from './BottomNavigation';
-import AppDrawer from './Drawer';
 import Sidebar from './SideBar';
-import useAuth, { UserTokenData } from '@/hooks/useAuth';
+import { UserTokenData } from '@/hooks/useAuth';
 
 interface TemplatePageProps {
   pageTitle: string;
   children?: React.ReactNode;
+  user: UserTokenData;
 }
 
 export default function TemplatePage({
   children,
   pageTitle,
+  user,
 }: TemplatePageProps) {
-  const { user } = useAuth();
-
   return (
     <>
       <Head>
