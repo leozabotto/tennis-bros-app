@@ -1,6 +1,6 @@
 import { BottomNavigationButton } from './index';
 
-export default function BottomNavigationButton({
+export default function NavigationButton({
   href,
   Icon,
   isActiveDefinedBy,

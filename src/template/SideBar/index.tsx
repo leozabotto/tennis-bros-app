@@ -23,8 +23,6 @@ export default function Sidebar({ user }: { user: UserTokenData }) {
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
   const handleCopyReferLink = () => {
-    console.log(user.id);
-
     navigator?.share({
       url: `https://${window.location.host}/app-invite?userId=${user.id}`,
     });

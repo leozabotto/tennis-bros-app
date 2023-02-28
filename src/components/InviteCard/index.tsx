@@ -65,9 +65,6 @@ const InviteActions = ({
   userAlreadyInteracted,
   isRejected,
 }: IInviteActions) => {
-  console.log(isRejected);
-  console.log(userAlreadyInteracted);
-  console.log(userAlreadyInteracted);
   return (
     <div className="flex gap-3 mt-5 justify-center mt-9">
       {((isRejected && userAlreadyInteracted) || !userAlreadyInteracted) && (

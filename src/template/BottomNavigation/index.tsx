@@ -8,18 +8,18 @@ import {
   UilTennisBall,
 } from '@iconscout/react-unicons';
 
-import BottomNavigationButton from './BottomNavigationButton';
+import NavigationButton from './NavigationButton';
 import { UserTokenData } from '@/hooks/useAuth';
 import { infoToaster, successToaster } from '@/utils/toaster';
 import { useRouter } from 'next/router';
 
-export type BottomNavigationButton = {
+export interface BottomNavigationButton {
   href: string;
   Icon: Icon;
   currentPath?: string;
   isActiveDefinedBy?: string;
   onClick?: () => any;
-};
+}
 
 export default function BottomNavigation({ user }: { user: UserTokenData }) {
   const [currentPath, setCurrentPath] = useState('');
@@ -43,25 +43,25 @@ export default function BottomNavigation({ user }: { user: UserTokenData }) {
 
   const navigationItems = useRef<BottomNavigationButton[]>([
     {
-      href: '/home',
+      href: 'home',
       isActiveDefinedBy: 'path',
       onClick: () => router.push('home'),
       Icon: UilEstate,
     },
     {
-      href: '/matches',
+      href: 'matches',
       isActiveDefinedBy: 'path',
       onClick: () => infoToaster('Em desenvolvimento'),
       Icon: UilTennisBall,
     },
     {
-      href: '/stats',
+      href: 'stats',
       isActiveDefinedBy: 'path',
       onClick: () => infoToaster('Em desenvolvimento'),
       Icon: UilChartLine,
     },
     {
-      href: '/refer-friend',
+      href: 'refer-friend',
       isActiveDefinedBy: 'path',
       onClick: () => handleCopyReferLink(),
       Icon: UilEnvelopeShare,
@@ -80,7 +80,11 @@ export default function BottomNavigation({ user }: { user: UserTokenData }) {
         >
           {navigationItems.current.map(
             (item: BottomNavigationButton, index: number) => (
-              <BottomNavigationButton key={index} {...item} />
+              <NavigationButton
+                key={index}
+                currentPath={currentPath}
+                {...item}
+              />
             )
           )}
         </div>
