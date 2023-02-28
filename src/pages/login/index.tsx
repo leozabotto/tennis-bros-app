@@ -28,7 +28,6 @@ type FormDataAuthUser = {
 };
 
 export default function Login() {
-  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
   const { handleSignIn } = useAuth();
@@ -60,8 +59,8 @@ export default function Login() {
     } catch (err) {
       const error = getResponseError(err);
       errorToaster(getAuthUserError(error?.code || 0));
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   return (

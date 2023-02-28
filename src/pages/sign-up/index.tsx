@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -32,6 +33,7 @@ type FormDataCreateUser = {
 
 export default function SignUp() {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const { register, handleSubmit, setError, control } =
     useForm<FormDataCreateUser>({
@@ -72,6 +74,7 @@ export default function SignUp() {
   };
 
   const onSubmit = async (data: FormDataCreateUser) => {
+    setIsLoading(true);
     const isValid = validateFormData(data);
 
     if (isValid) {
@@ -87,6 +90,7 @@ export default function SignUp() {
       } catch (err) {
         const error = getResponseError(err);
         errorToaster(getCreateUserError((error?.code as number) || 0));
+        setIsLoading(false);
       }
     }
 
@@ -199,7 +203,9 @@ export default function SignUp() {
                 />
               </div>
               <div className="w-full mt-5">
-                <Button onClick={handleSubmit(onSubmit)}>Registrar</Button>
+                <Button onClick={handleSubmit(onSubmit)} disabled={isLoading}>
+                  Registrar
+                </Button>
               </div>
               <div>
                 <p className="text-center text-gray-600 font-medium">
