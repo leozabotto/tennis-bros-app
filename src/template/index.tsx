@@ -31,7 +31,7 @@ export default function TemplatePage({
         <div className="p-4 md:ml-64 pb-16 md:pb-0">{children}</div>
       </main>
 
-      <BottomNavigation />
+      <BottomNavigation user={user} />
     </>
   );
 }
