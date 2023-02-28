@@ -51,13 +51,11 @@ const useAuth = () => {
   };
 
   const handleSignOut = (): void => {
+    destroyCookie(undefined, 'session.token', { path: '/' });
+    destroyCookie(undefined, 'session.user', { path: '/' });
+    resetUserToken();
+    resetUserData();
     router.push('/login');
-    setTimeout(() => {
-      destroyCookie(undefined, 'session.token', { path: '/' });
-      destroyCookie(undefined, 'session.user', { path: '/' });
-      resetUserToken();
-      resetUserData();
-    }, 1000);
   };
 
   return {
