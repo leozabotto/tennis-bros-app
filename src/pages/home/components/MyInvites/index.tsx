@@ -20,7 +20,7 @@ export default function MyInvites() {
         showActionButtons={false}
       />
       <InviteCard
-        status="Finalizado"
+        status="Aberto"
         isRejected={false}
         userOwner={true}
         showMenuButton={true}

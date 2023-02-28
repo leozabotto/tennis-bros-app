@@ -33,15 +33,14 @@ export default function Login() {
 
   const { handleSignIn } = useAuth();
 
-  const { register, handleSubmit, setError, control } =
-    useForm<FormDataAuthUser>({
-      defaultValues: {
-        user: '',
-        password: '',
-      },
-      mode: 'onBlur',
-      reValidateMode: 'onBlur',
-    });
+  const { register, handleSubmit, control } = useForm<FormDataAuthUser>({
+    defaultValues: {
+      user: '',
+      password: '',
+    },
+    mode: 'onBlur',
+    reValidateMode: 'onBlur',
+  });
 
   const { errors } = useFormState({
     control,
@@ -63,10 +62,6 @@ export default function Login() {
       errorToaster(getAuthUserError(error?.code || 0));
     }
     setIsLoading(false);
-  };
-
-  const handleRedirect = (): void => {
-    router.push('/home');
   };
 
   return (

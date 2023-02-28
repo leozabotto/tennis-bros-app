@@ -7,3 +7,7 @@ export const successToaster = (message: string, time: number = 5000) => {
 export const errorToaster = (message: string, time: number = 5000) => {
   toast(message, { autoClose: time, type: 'error' });
 };
+
+export const infoToaster = (message: string, time: number = 5000) => {
+  toast(message, { autoClose: time, type: 'info' });
+};

@@ -1,3 +1,24 @@
+import InviteCard from '@/components/InviteCard';
+
 export default function AcceptedInvites() {
-  return <h1>Convites Aceitos</h1>;
+  return (
+    <div>
+      <InviteCard
+        status="Aberto"
+        showMenuButton={false}
+        userOwner={false}
+        userAlreadyInteracted={true}
+        isRejected={false}
+        showActionButtons={true}
+      />
+      <InviteCard
+        status="Finalizado"
+        showMenuButton={false}
+        userOwner={false}
+        userAlreadyInteracted={true}
+        isRejected={false}
+        showActionButtons={true}
+      />
+    </div>
+  );
 }

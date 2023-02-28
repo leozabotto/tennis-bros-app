@@ -16,7 +16,7 @@ import NavButton, { INavButton } from '@/components/NavButton';
 
 import { UserTokenData } from '@/hooks/useAuth';
 import LogoutConfirmationModal from '@/components/LogoutConfirmationModal';
-import { successToaster } from '@/utils/toaster';
+import { infoToaster, successToaster } from '@/utils/toaster';
 
 export default function Sidebar({ user }: { user: UserTokenData }) {
   const router = useRouter();
@@ -47,14 +47,14 @@ export default function Sidebar({ user }: { user: UserTokenData }) {
     {
       href: '/matches',
       isActiveDefinedBy: 'path',
-      onClick: () => router.push('matches'),
+      onClick: () => infoToaster('Em desenvolvimento'),
       label: 'Minhas Partidas',
       Icon: UilTennisBall,
     },
     {
       href: '/stats',
       isActiveDefinedBy: 'path',
-      onClick: () => router.push('stats'),
+      onClick: () => infoToaster('Em desenvolvimento'),
       label: 'Estatísticas',
       Icon: UilChartLine,
     },
@@ -68,7 +68,7 @@ export default function Sidebar({ user }: { user: UserTokenData }) {
     {
       href: '/profile',
       isActiveDefinedBy: 'path',
-      onClick: () => router.push('profile'),
+      onClick: () => infoToaster('Em desenvolvimento'),
       label: 'Perfil',
       Icon: UilUserCircle,
     },
@@ -88,7 +88,6 @@ export default function Sidebar({ user }: { user: UserTokenData }) {
         className="invisible md:visible fixed top-0 c-pt-15 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
         aria-label="Sidebar"
       >
-        <p>{user.id}</p>
         <div className="h-full px-3 py-4 overflow-y-auto bg-white border-r border-gray-200">
           <div className="mt-5">
             <div className="flex justify-center">

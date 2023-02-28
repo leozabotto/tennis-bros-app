@@ -65,46 +65,41 @@ const InviteActions = ({
   userAlreadyInteracted,
   isRejected,
 }: IInviteActions) => {
+  console.log(isRejected);
+  console.log(userAlreadyInteracted);
+  console.log(userAlreadyInteracted);
   return (
     <div className="flex gap-3 mt-5 justify-center mt-9">
-      {(isRejected && userAlreadyInteracted) ||
-        (!userAlreadyInteracted && (
-          <button
-            className="bg-c-green-200 p-2 rounded-full w-32 h-12 flex items-center justify-center gap-2 font-medium  hover:bg-c-green-300 text-white"
-            title="Aceitar Convite"
-          >
-            <UilCheckCircle /> Aceitar
-          </button>
-        ))}
+      {((isRejected && userAlreadyInteracted) || !userAlreadyInteracted) && (
+        <button
+          className="bg-c-green-200 p-2 rounded-full w-32 h-12 flex items-center justify-center gap-2 font-medium  hover:bg-c-green-300 text-white"
+          title="Aceitar Convite"
+        >
+          <UilCheckCircle /> Aceitar
+        </button>
+      )}
 
-      {(!isRejected && userAlreadyInteracted) ||
-        (!userAlreadyInteracted && (
-          <button
-            className="bg-red-500 p-2 rounded-full w-32 h-12 flex items-center justify-center gap-2 font-medium hover:bg-red-400 text-white"
-            title="Recusar Convite"
-          >
-            <UilTimesCircle /> Recusar
-          </button>
-        ))}
+      {((!isRejected && userAlreadyInteracted) || !userAlreadyInteracted) && (
+        <button
+          className="bg-red-500 p-2 rounded-full w-32 h-12 flex items-center justify-center gap-2 font-medium hover:bg-red-400 text-white"
+          title="Recusar Convite"
+        >
+          <UilTimesCircle /> Recusar
+        </button>
+      )}
     </div>
   );
 };
 
-const InviteFinishButton = ({
-  userAlreadyInteracted,
-  isRejected,
-}: IInviteActions) => {
+const InviteFinishButton = () => {
   return (
     <div className="flex gap-3 mt-5 justify-center mt-9">
-      {(isRejected && userAlreadyInteracted) ||
-        (!userAlreadyInteracted && (
-          <button
-            className="bg-c-green-200 p-2 rounded-full w-32 h-12 flex items-center justify-center gap-2 font-medium  hover:bg-c-green-300 text-white"
-            title="Finalizar Convite"
-          >
-            <UilCheckCircle /> Finalizar
-          </button>
-        ))}
+      <button
+        className="bg-c-green-200 p-2 rounded-full w-32 h-12 flex items-center justify-center gap-2 font-medium  hover:bg-c-green-300 text-white"
+        title="Finalizar Convite"
+      >
+        <UilCheckCircle /> Finalizar
+      </button>
     </div>
   );
 };
@@ -188,6 +183,8 @@ export default function InviteCard({
           isRejected={isRejected}
         />
       )}
+
+      {userOwner && !isFinished && <InviteFinishButton />}
     </div>
   );
 }

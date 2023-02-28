@@ -20,7 +20,7 @@ import { UserTokenData } from '@/hooks/useAuth';
 
 import TriggerButton from './TriggerButton';
 import LogoutConfirmationModal from '@/components/LogoutConfirmationModal';
-import { successToaster } from '@/utils/toaster';
+import { infoToaster, successToaster } from '@/utils/toaster';
 
 export default function AppDrawer({ user }: { user: UserTokenData }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,14 +56,14 @@ export default function AppDrawer({ user }: { user: UserTokenData }) {
     {
       href: '/matches',
       isActiveDefinedBy: 'path',
-      onClick: () => router.push('matches'),
+      onClick: () => infoToaster('Em desenvolvimento'),
       label: 'Minhas Partidas',
       Icon: UilTennisBall,
     },
     {
       href: '/stats',
       isActiveDefinedBy: 'path',
-      onClick: () => router.push('stats'),
+      onClick: () => infoToaster('Em desenvolvimento'),
       label: 'Estatísticas',
       Icon: UilChartLine,
     },
@@ -77,7 +77,7 @@ export default function AppDrawer({ user }: { user: UserTokenData }) {
     {
       href: '/profile',
       isActiveDefinedBy: 'path',
-      onClick: () => router.push('profile'),
+      onClick: () => infoToaster('Em desenvolvimento'),
       label: 'Perfil',
       Icon: UilUserCircle,
     },
